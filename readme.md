@@ -1,18 +1,21 @@
 # Terraform Example
 
-Just enough to get started.
+This example is just enough to get started with Terraform.
 
-## Basics
+## Terraform Basics
 
-# Terraform
+Infrastructure as Code
 
-Setup
-Download terraform zip file from terraform.io
-`unzip terraform` unzip the zip file
-`mv terraform /usr/local/bin` move it to the user bin folder as it is already in the PATH
+### Setup
 
-.tf file
-HCL - Harshicorp Configuration Language (Happy middle of JSON and YAML)
+Download terraform zip file from `terraform.io`
+Run `unzip terraform` to unzip the zip file
+Run `mv terraform /usr/local/bin` move it to the user bin folder as this folder is already in the PATH and you can invoke terraform from anywhere.
+
+Terraform scripts are inside `.tf` file
+Terraform uses declarative language called HCL - Harshicorp Configuration Language (HCL is happy medium of JSON and YAML)
+
+### Basic Commands
 
 `terraform init` will dowload the provider
 
@@ -24,7 +27,7 @@ To automatically approve (Without hitting yes everytime)
 
 `terraform apply --auto-approve`
 
-Never touch state file unless you are very sure (`.tfstate`)
+Never touch state file unless you are very sure what you are doing. (`.tfstate`)
 
 To view the items in the current state : `terraform state list`
 
@@ -42,6 +45,7 @@ aws_route_table_association.prod_vpc_subnet_1_to_prod_route_table
 aws_security_group.allow_web
 aws_subnet.prod_vpc_subnet_1
 aws_vpc.prod_vpc
+
 ```
 
 To view specific details about a particular item `terraform state show <resourcename>`
@@ -87,7 +91,7 @@ To output the state details when applying use the output
 If you are in production you dont want to use the output command. Instead try
 `terraform refresh` which will grab all the output statements and print out for us.
 
-To delete/apply just one resource out of hte list use the terraform target.
+To delete/apply just one resource out of the list use the terraform target.
 
 Example: This will destroy the webserve EC2 instance alone and refresh the state.
 `terraform destroy -target aws_instance.web_server_instance `
@@ -141,4 +145,4 @@ secret_key = "AAsWlmnqweerd23rfdffj34113jfsj34KDB"
 
 ```
 
-When you apply you have to specify `terraform apply -var-file secrtes.tfvars`
+When you apply you have to specify `terraform apply -var-file=./secrtes.tfvars`
